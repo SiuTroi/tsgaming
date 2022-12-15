@@ -54,7 +54,7 @@ const ProductDetail = () => {
             onClick={increaseQuantity}>+</button>
           </div>
           <div className='flex items-center gap-3'>
-            <h2 className='font-semibold'>{new Intl.NumberFormat('en-US', {style : 'currency', currency : 'USD'}).format(product.price * quantity)}</h2>
+            <h2 className='font-semibold'>{new Intl.NumberFormat('en-US', {style : 'currency', currency : 'USD'}).format(product.price)}</h2>
             <button className='flex items-center gap-2 bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded-lg' 
               onClick={addToCart}>
               <FaShoppingCart className='text-white' /> 

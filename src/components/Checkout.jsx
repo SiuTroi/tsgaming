@@ -7,6 +7,7 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import clapping from "../assets/clapping.png";
 import { AiOutlineClose } from "react-icons/ai";
 import Modalpay from "./Modalpay";
+import { toast } from "react-toastify";
 
 const CheckOut = () => {
   const { products, totalPrice } = useSelector((state) => state.CartReducer);
@@ -27,7 +28,7 @@ const CheckOut = () => {
         setUsers(snapshot.val());
       }
     });
-  }, []);
+  }, [])
 
   const handleCheckout = () => {
     if (user?.userid) {

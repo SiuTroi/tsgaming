@@ -4,11 +4,15 @@ import { database } from "../../firebase";
 import * as Yup from "yup"
 import { Link, useNavigate} from "react-router-dom"
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { AiOutlineClose } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false)
   const [users, setUsers] = useState([])
+  const [isLoginError, setLoginError] = useState(false)
+  const { product } = useSelector(state => state.ProductReducer)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const dbRef = ref(database);
@@ -29,15 +33,19 @@ const LoginForm = () => {
     <div>
         <div className="max-w-lg mx-auto px-16 pt-16 pb-24 mt-12 bg-white rounded-2xl shadow-xl">
         {loading && <div className='overlay z-9999'><div className='absolute-center loading'></div></div>}
-
+        <div className="text-right">
+              <button className="p-2 rounded-lg bg-[#f6f6f6] shadow-2xl" onClick={() => navigate(-1)}>
+                <AiOutlineClose size={16} />
+              </button>
+            </div>
         <h1 className="text-center font-semibold text-[22px] mb-12">Log in</h1>
         <Formik
               initialValues={{ email: "", password: "", loginError: "" }}
               validationSchema={Yup.object({
                 email: Yup.string()
-                  .email("E-mail không hợp lệ.")
-                  .required("Trường này là bắt buộc!"),
-                password: Yup.string().required("Trường này là bắt buộc!"),
+                  .email("E-mail not valid!")
+                  .required("E-mail is required!"),
+                password: Yup.string().required("Password is required!"),
               })}
               onSubmit={(values, { setSubmitting }) => {
                 users.map(item => {
@@ -51,9 +59,12 @@ const LoginForm = () => {
                             password: values.password,
                           },
                         });
-                        navigate(-1);
+                        navigate(`/products/${product.productName}`);
+                    }else{
+                      setLoginError(true)
                     }
                 })
+                toast.success("Login successfully!!")
               }}
             >
               {({
@@ -72,8 +83,8 @@ const LoginForm = () => {
                       name="email"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className="w-full py-3 px-4 rounded-2xl outline-[#fd802b] text-[14px] font-light 
-                      border border-solid border-[#ededed] p-3"
+                      className={`w-full py-3 px-4 rounded-2xl outline-blue-400 text-[12px] font-light 
+                      border border-solid p-3 ${errors.email && touched.email && errors.email ? "border-red" : "border-[#ededed]"}`}
                       value={values.email}
                       placeholder="E-mail"
                     />
@@ -87,15 +98,15 @@ const LoginForm = () => {
                       name="password"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className="w-full py-3 px-4 rounded-2xl outline-[#fd802b] text-[14px] font-light 
-                      border border-solid border-[#ededed] p-3"
+                      className={`w-full py-3 px-4 rounded-2xl outline-blue-400 text-[12px] font-light 
+                      border border-solid border-[#ededed] p-3 ${errors.password && touched.password && errors.password ? "border-red" : "border-[#ededed]"}`}
                       value={values.password}
                       placeholder="********"
                     />
                     <p className="text-red-600 text-left font-light text-[14px]">
                       {errors.password && touched.password && errors.password}
                     </p>
-                    
+                    {isLoginError && <p className="text-red-600 text-left font-light">wrong email or password!</p>}
                   </div>
                   <button
                     type="submit"

@@ -49,7 +49,6 @@ const HistoryCheckout = () => {
               <div className="">
                 <div className="flex justify-between items-center">
                   <h2 className="font-medium text-lg">{item.productName}</h2>
-                  <button onClick={() => handleCancelHis(index)}>Cancel checkout</button>
                 </div>
                 <p className="text-[14px] font-light">{item.description}</p>
               </div>

@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Modalpay = ({ setIsShowModalPay }) => {
-    const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const { products } = useSelector((state) => state.CartReducer);
     const user = useSelector((state) => state.UserReducer);
@@ -58,9 +57,8 @@ const Modalpay = ({ setIsShowModalPay }) => {
 
   return (
     <>
-        {loading && <div className='overlay z-9999'><div className='absolute-center loading'></div></div>}
         <div className='overlay flex justify-center items-center'>
-            <div className='bg-white w-[92vw] h-[96vh] relative rounded-2xl shadow-xl px-6 pt-12 lg:w-[70vw] xl:w-[60vw] 2xl:w-[50vw]'>
+            <div className='bg-white w-[92vw] h-[96vh] relative rounded-2xl shadow-xl px-6 pt-12 lg:w-[70vw] xl:w-[60vw] 2xl:w-[50vw] modal-animation'>
                 <button className='absolute top-4 right-4' 
                 onClick={() => setIsShowModalPay(false)}>
                     <AiOutlineClose size={24} />
@@ -75,10 +73,10 @@ const Modalpay = ({ setIsShowModalPay }) => {
                             address: "" 
                         }}
                         validationSchema={Yup.object({
-                            fullName: Yup.string().required("Họ tên là bắt buộc!"),
-                            email: Yup.string().email("Email không hợp lệ!"),
-                            phone: Yup.string().required("SĐT tên là bắt buộc!"),
-                            address: Yup.string().required("Địa chỉ là bắt buộc!"),
+                            fullName: Yup.string().required("fullName is required!"),
+                            email: Yup.string().email("Email not valid!"),
+                            phone: Yup.string().required("phone is required!"),
+                            address: Yup.string().required("address is required!"),
                         })}
                         onSubmit={(values, { setSubmitting }) => handleCheckout(values)}
                         >
@@ -93,17 +91,17 @@ const Modalpay = ({ setIsShowModalPay }) => {
                         }) => (
                             <form onSubmit={handleSubmit} className="w-full" id="evaluate-form">
                                 <div className="w-full my-4">
-                                    <label htmlFor="fullName">Họ tên <span className='text-red-600'>*</span> </label>
+                                    <label htmlFor="fullName">Full name: <span className='text-red-600'>*</span> </label>
                                     <input
                                     type="text"
                                     name="fullName"
                                     id="fullName"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    className="w-full py-3 px-4 rounded-2xl outline-[#fd802b] text-[14px] font-light 
-                                    border border-solid border-[#ededed] p-3"
+                                    className={`w-full py-3 px-4 rounded-2xl outline-blue-400 text-[12px] font-light 
+                                    border border-solid p-3 ${errors.fullName && touched.fullName && errors.fullName ? "border-red" : "border-[#ededed]"}`}
                                     value={values.fullName}
-                                    placeholder="Họ tên người nhận. VD: Nguyễn. A"
+                                    placeholder="recipient's name. Ex: Nguyễn. A"
                                     />
                                     <p className="text-red-600 text-left font-light text-[14px]">
                                     {errors.fullName && touched.fullName && errors.fullName}
@@ -117,44 +115,44 @@ const Modalpay = ({ setIsShowModalPay }) => {
                                     id="email"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    className="w-full py-3 px-4 rounded-2xl outline-[#fd802b] text-[14px] font-light 
-                                    border border-solid border-[#ededed] p-3"
+                                    className={`w-full py-3 px-4 rounded-2xl outline-blue-400 text-[12px] font-light 
+                                    border border-solid p-3 ${errors.email && touched.email && errors.email ? "border-red" : "border-[#ededed]"}`}
                                     value={values.email}
-                                    placeholder="VD: NguyenA@gmail.com"
+                                    placeholder="Ex: NguyenA@gmail.com"
                                     />
                                     <p className="text-red-600 text-left font-light text-[14px]">
                                     {errors.email && touched.email && errors.email}
                                     </p>
                                 </div>
                                 <div className="w-full my-4">
-                                    <label htmlFor="phone">Số điện thoại <span className='text-red-600'>*</span></label>
+                                    <label htmlFor="phone">Phone: <span className='text-red-600'>*</span></label>
                                     <input
                                     type="text"
                                     name="phone"
                                     id="phone"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    className="w-full py-3 px-4 rounded-2xl outline-[#fd802b] text-[14px] font-light 
-                                    border border-solid border-[#ededed] p-3"
+                                    className={`w-full py-3 px-4 rounded-2xl outline-blue-400 text-[12px] font-light 
+                                    border border-solid p-3 ${errors.phone && touched.phone && errors.phone ? "border-red" : "border-[#ededed]"}`}
                                     value={values.phone}
-                                    placeholder="VD: 0123456789"
+                                    placeholder="Ex: 0123456789"
                                     />
                                     <p className="text-red-600 text-left font-light text-[14px]">
                                     {errors.phone && touched.phone && errors.phone}
                                     </p>
                                 </div>
                                 <div className="w-full my-4">
-                                    <label htmlFor="address">Địa chỉ <span className='text-red-600'>*</span></label>
+                                    <label htmlFor="address">Address <span className='text-red-600'>*</span></label>
                                     <input
                                     type="text"
                                     name="address"
                                     id="address"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    className="w-full py-3 px-4 rounded-2xl outline-[#fd802b] text-[14px] font-light 
-                                    border border-solid border-[#ededed] p-3"
+                                    className={`w-full py-3 px-4 rounded-2xl outline-blue-400 text-[12px] font-light 
+                                    border border-solid p-3 ${errors.address && touched.address && errors.address ? "border-red" : "border-[#ededed]"}`}
                                     value={values.address}
-                                    placeholder="VD: 2/27, p.Hiệp Phú, Thủ Đức, HCM"
+                                    placeholder="Ex: 2/27, p.Hiệp Phú, Thủ Đức, HCM"
                                     />
                                     <p className="text-red-600 text-left font-light text-[14px]">
                                         {errors.address && touched.address && errors.address}
@@ -163,7 +161,7 @@ const Modalpay = ({ setIsShowModalPay }) => {
                             <button
                                 type="submit"
                                 className="text-[14px] font-light my-2 p-4 rounded-2xl 
-                                w-full bg-[#167674] text-white md:w-[220px]"
+                                w-full bg-blue-500 text-white md:w-[220px]"
                             >
                             Xác nhận
                             </button>

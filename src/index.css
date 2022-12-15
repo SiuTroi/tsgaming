@@ -94,3 +94,18 @@ html {
 .z-9999 {
     z-index: 9999 !important;
 }
+.border-red {
+    border: 1px solid red !important;
+}
+.modal-animation {
+    animation: modalAnimation .2s ease-in-out;
+}
+
+@keyframes modalAnimation {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { ref, child, get, set } from "firebase/database";
 import { database } from "../../firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignUpForm = () => {
   const [loading, setLoading] = useState(false)
   const [users, setUsers] = useState([])
+  const { product } = useSelector(state => state.ProductReducer)
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const dbRef = ref(database);
@@ -62,16 +64,18 @@ const SignUpForm = () => {
             <Formik
               initialValues={{ email: "", password: "", firstName: "", lastName: "", passwordConfirmed: "" }}
               validationSchema={Yup.object({
-                firstName: Yup.string().required("Trường này là bắt buộc!"),
-                lastName: Yup.string().required("Trường này là bắt buộc!"),
+                firstName: Yup.string().required("firstName is required!"),
+                lastName: Yup.string().required("lastName is required!"),
                 email: Yup.string()
                   .email("E-mail không hợp lệ.")
-                  .required("Trường này là bắt buộc!"),
-                password: Yup.string().required("Trường này là bắt buộc!"),
-                passwordConfirmed: Yup.string().oneOf([Yup.ref('password'), null], 'Mật khẩu không khớp!').required("Trường này là bắt buộc!"),
+                  .notOneOf(users.map(item => item.email), "Email already exists in the system.")
+                  .required("email is required!"),
+                password: Yup.string().required("password is required!"),
+                passwordConfirmed: Yup.string().oneOf([Yup.ref('password'), null], 'Mật khẩu không khớp!').required("passwordConfirmed is required!"),
               })}
               onSubmit={(values, { setSubmitting }) => {
                 setLoading(true)
+                dispatch({type: "RESET_CART"})
                 setTimeout(() => {
                   set(child(dbRef, `users/${users.length}`), {
                     email: values.email,
@@ -91,7 +95,8 @@ const SignUpForm = () => {
                   })
                   setSubmitting(false);
                   setLoading(false)
-                  navigate(-1)
+                  navigate(`/products/${product.productName}`);
+                  toast.success("Signup successfully!!")
                 }, 1000);
               }}
             >
@@ -112,10 +117,10 @@ const SignUpForm = () => {
                         name="firstName"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className="w-full py-3 px-4 rounded-2xl outline-[#fd802b] text-[12px] font-light 
-                        border border-solid border-[#ededed] p-3"
+                        className={`w-full py-3 px-4 rounded-2xl outline-none text-[12px] font-light 
+                        border border-solid border-[#ededed] p-3 ${errors.firstName && touched.firstName && errors.firstName ? "border-red" : "border-[#ededed]"}`}
                         value={values.firstName}
-                        placeholder="Họ"
+                        placeholder="first name"
                       />
                       <p className="text-red-600 text-left font-light text-[12px]">
                         {errors.firstName && touched.firstName && errors.firstName}
@@ -127,10 +132,10 @@ const SignUpForm = () => {
                         name="lastName"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className="w-full py-3 px-4 rounded-2xl outline-[#fd802b] text-[12px] font-light 
-                        border border-solid border-[#ededed] p-3"
+                        className={`w-full py-3 px-4 rounded-2xl outline-none text-[12px] font-light 
+                        border border-solid border-[#ededed] p-3 ${errors.lastName && touched.lastName && errors.lastName ? "border-red" : "border-[#ededed]"}`}
                         value={values.lastName}
-                        placeholder="Tên"
+                        placeholder="last name"
                       />
                       <p className="text-red-600 text-left font-light text-[12px]">
                         {errors.lastName && touched.lastName && errors.lastName}
@@ -143,14 +148,15 @@ const SignUpForm = () => {
                       name="email"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className="w-full py-3 px-4 rounded-2xl outline-[#fd802b] text-[12px] font-light 
-                      border border-solid border-[#ededed] p-3"
+                      className={`w-full py-3 px-4 rounded-2xl outline-none text-[12px] font-light 
+                      border border-solid p-3 ${errors.email && touched.email && errors.email ? "border-red" : "border-[#ededed]"}`}
                       value={values.email}
                       placeholder="E-mail"
                     />
                     <p className="text-red-600 text-left font-light text-[12px]">
                       {errors.email && touched.email && errors.email}
                     </p>
+                    {/* <p>{users.map(item => item.email === values.email) ? "Email already exists in the system." : ""}</p> */}
                   </div>
                   <div className="w-full my-4">
                     <input
@@ -158,8 +164,8 @@ const SignUpForm = () => {
                       name="password"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className="w-full py-3 px-4 rounded-2xl outline-[#fd802b] text-[12px] font-light 
-                      border border-solid border-[#ededed] p-3"
+                      className={`w-full py-3 px-4 rounded-2xl outline-none text-[12px] font-light 
+                      border border-solid border-[#ededed] p-3 ${errors.password && touched.password && errors.password ? "border-red" : "border-[#ededed]"}`}
                       value={values.password}
                       placeholder="Mật khẩu"
                     />
@@ -173,8 +179,8 @@ const SignUpForm = () => {
                       name="passwordConfirmed"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className="w-full py-3 px-4 rounded-2xl outline-[#fd802b] text-[12px] font-light 
-                      border border-solid border-[#ededed] p-3"
+                      className={`w-full py-3 px-4 rounded-2xl outline-none text-[12px] font-light 
+                      border border-solid p-3 ${errors.passwordConfirmed && touched.passwordConfirmed && errors.passwordConfirmed ? "border-red" : "border-[#ededed]"} `}
                       value={values.passwordConfirmed}
                       placeholder="Nhập lại mật khẩu"
                     />

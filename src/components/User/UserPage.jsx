@@ -4,7 +4,6 @@ import { database } from '../../firebase';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineUser } from 'react-icons/ai';
 
@@ -21,11 +20,7 @@ const UserPage = () => {
         setUsers(snapshot.val())
       }
     })
-
-    if(user.userid) {
-      toast.success("Login success!!")
-    }
-  }, [])
+  }, [user.userid])
 
   return (
     <div className='max-w-md mx-auto'>
@@ -55,6 +50,7 @@ const UserPage = () => {
         ) : (
           <div className='px-16 pt-16 pb-32 text-center mt-12 mx-4 bg-white rounded-2xl shadow-lg'>
             <div>
+              <h2 className='text-2xl text-blue-500 font-bold text-center'>Beauty.bd</h2>
               <h6 className='text-lg font-medium mb-10'>Sign in to check your order.</h6>
               <Link to={"/login"}>
                 <button  className='w-full bg-blue-500 py-2 rounded-2xl text-white'>
