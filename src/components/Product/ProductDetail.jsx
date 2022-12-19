@@ -52,7 +52,7 @@ const ProductDetail = () => {
         <div className='px-4 mt-4 md:h-1/3 pb-6'>
           <h1 className='font-semibold text-[20px] md:mt-12'>{product?.productName}</h1>
           <p className='mt-2 text-gray-500'>{product?.description}</p>
-          <div className='mt-20 flex justify-between items-center'>
+          <div className='mt-8 md:mt-20 flex justify-between items-center'>
             <div className='bg-gray-200 w-[90px] flex items-center justify-around rounded-md'>
               <button 
               className={`px-2 text-[22px] ${quantity === 1 && "cursor-not-allowed"}`} 

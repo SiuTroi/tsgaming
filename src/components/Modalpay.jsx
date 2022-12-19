@@ -12,7 +12,6 @@ const Modalpay = ({ setIsShowModalPay }) => {
     const [users, setUsers] = useState([]);
     const { products } = useSelector((state) => state.CartReducer);
     const user = useSelector((state) => state.UserReducer);
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const dbRef = ref(database);
 

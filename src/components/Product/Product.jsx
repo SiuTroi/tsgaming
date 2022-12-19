@@ -23,7 +23,7 @@ const Product = () => {
   }, [])
 
   return (
-    <div className='px-4 mt-4 lg:px-[12%] sm:px-8 xl:px-[14%] 2xl:px-[16%]'>
+    <div className='pb-20 px-4 mt-4 lg:px-[12%] sm:px-8 xl:px-[14%] 2xl:px-[16%]'>
       <h1 className='font-medium text-[24px] mb-3 ml-3 text-blue-500'>All Product</h1>
       <div className='lg:flex md:gap-4 scroll'>
         <div className='flex flex-wrap gap-2 sm:gap-3 lg:gap-4 justify-center sm:justify-start'>

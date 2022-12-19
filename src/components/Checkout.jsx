@@ -7,11 +7,10 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import clapping from "../assets/clapping.png";
 import { AiOutlineClose } from "react-icons/ai";
 import Modalpay from "./Modalpay";
-import { toast } from "react-toastify";
+import {formatCurrency} from "../utils/currencyFormart"
 
 const CheckOut = () => {
   const { products, totalPrice } = useSelector((state) => state.CartReducer);
-  const { product } = useSelector((state) => state.ProductReducer);
   const user = useSelector((state) => state.UserReducer);
   const [isLogin, setIsLogin] = useState(false);
   const [isShowModalPay, setIsShowModalPay] = useState(false)
@@ -158,10 +157,7 @@ const CheckOut = () => {
                           </button>
                         </div>
                         <h3 className="font-semibold">
-                          {new Intl.NumberFormat("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                          }).format(item.price)}
+                          {formatCurrency(item.price)}
                         </h3>
                       </div>
                     </div>
@@ -182,30 +178,19 @@ const CheckOut = () => {
               <p className="flex justify-between items-center">
                 <span className=" text-gray-400">Subtotal:</span>
                 <span className="font-semibold">
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }).format(totalPrice)}
+                  {formatCurrency(totalPrice)}
                 </span>
               </p>
               <p className="flex justify-between items-center">
                 <span className=" text-gray-400">Shipping Cost:</span>
                 <span className="font-semibold">
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }).format(products.length >= 1 ? shippingCost : 0)}
+                  {formatCurrency(products.length >= 1 ? shippingCost : 0)}
                 </span>
               </p>
               <h1 className="flex justify-between items-center font-semibold text-[22px] mt-2">
                 <span>Total:</span>{" "}
                 <span>
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }).format(
-                    totalPrice + (products.length >= 1 ? shippingCost : 0)
-                  )}
+                  {formatCurrency(totalPrice + (products.length >= 1 ? shippingCost : 0))}
                 </span>
               </h1>
             </div>
@@ -219,7 +204,7 @@ const CheckOut = () => {
               >
                 Checkout
               </button>
-              <Link to={`/products/${product.productName}`}>
+              <Link to={`/products`}>
                 <button className="block w-full rounded-xl border border-solid border-blue-500 text-blue-500 mt-2 py-2">
                   Continue shopping
                 </button>
