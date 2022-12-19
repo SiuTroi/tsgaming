@@ -49,7 +49,7 @@ const CheckOut = () => {
     <>
       {isLogin && (
         <div className="overlay">
-          <div className="bg-white h-[60vh] w-[70vw] md:w-[50vw] xl:w-[30vw] mx-auto mt-12 px-6 pt-10 rounded-xl">
+          <div className="bg-white h-[50%] w-[70vw] md:w-[50vw] xl:w-[30vw] mx-auto mt-12 px-6 pt-10 rounded-xl">
             <div className="text-right">
               <button
                 className="p-2 rounded-lg bg-[#f6f6f6] shadow-2xl"
@@ -58,17 +58,19 @@ const CheckOut = () => {
                 <AiOutlineClose size={16} />
               </button>
             </div>
+            <h2 className='text-2xl text-blue-500 font-bold text-center'>Beauty.bd</h2>
             <h1 className="text-center font-semibold text-lg mb-12">
               Login to checkout
             </h1>
-            <div>
-              <Link to={"/login"}>
-                <button className="w-full bg-blue-500 mb-3 py-2 rounded-2xl text-white">
+            <div className="lg:flex lg:flex-col lg:justify-center lg:items-center">
+              <Link to={"/login"} className="lg:w-[220px]">
+                <button className="w-full bg-blue-500 py-2 rounded-2xl text-white hover:bg-blue-600">
                   Login
                 </button>
               </Link>
-              <Link to={"/signup"}>
-                <button className="w-full bg-transparent text-blue-500 border border-solid border-blue-500 py-2 rounded-2xl">
+              or
+              <Link to={"/signup"} className="lg:w-[220px]">
+                <button className="w-full bg-transparent text-blue-500 border border-solid border-blue-500 hover:bg-blue-600 hover:text-white py-2 rounded-2xl">
                   Sign up
                 </button>
               </Link>

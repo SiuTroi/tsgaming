@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { database } from "../firebase";
 import { arrayRemove, collection, deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { getFirestore } from "firebase/firestore";
+import { formatCurrency } from "../utils/currencyFormart";
 
 const HistoryCheckout = () => {
   const user = useSelector((state) => state.UserReducer);
@@ -50,14 +51,11 @@ const HistoryCheckout = () => {
                 <div className="flex justify-between items-center">
                   <h2 className="font-medium text-lg">{item.productName}</h2>
                 </div>
-                <p className="text-[14px] font-light">{item.description}</p>
+                <p className="text-[14px] font-light line-clamp-2">{item.description}</p>
               </div>
               <div className="flex justify-between items-center">
                 <p>Quantity: {item.quantity}</p>
-                <h3 className="font-semibold text-lg">{new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }).format(item.price)}</h3>
+                <h3 className="font-semibold text-lg">{formatCurrency(item.price)}</h3>
               </div>
               <p className="text-[14px]">Day of payment: <span className="font-light text-[12px]">{item.infoPayer.timeOfPayment}</span></p>
             </div>

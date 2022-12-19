@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { AiOutlineClose } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const Modalpay = ({ setIsShowModalPay }) => {
     const [users, setUsers] = useState([]);
@@ -24,7 +25,7 @@ const Modalpay = ({ setIsShowModalPay }) => {
       }, []);
     
     const handleCheckout = (values) => {
-        if(window.confirm("Xác nhận đây là địa chỉ để nhận hàng?")){
+        if(window.confirm("Confirm this is the address to receive the goods?")){
             const find = users.find((item) => item.userid === user.userid);
             const x = products.filter(
                 (item) =>
@@ -52,6 +53,7 @@ const Modalpay = ({ setIsShowModalPay }) => {
 
             dispatch({ type: "RESET_CART" });
             setIsShowModalPay(false)
+            toast.success("Order successfully!!")
         }
     };
 

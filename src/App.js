@@ -6,6 +6,7 @@ import SignupForm from './components/Form/SignupForm'
 import Header from './components/Header/Header'
 import HistoryCheckout from './components/HistoryCheckout'
 import Home from './components/Home'
+import ProductDetail from './components/Product/ProductDetail'
 import Review from './components/Review'
 import UserPage from './components/User/UserPage'
 const Product = lazy(() => import('./components/Product/Product'))
@@ -19,7 +20,8 @@ const App = () => {
       <Suspense fallback={<div className='overlay z-9999'><div className='absolute-center loading'></div></div>}>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/products/:productname' element={<Product />} />
+          <Route path='/products' element={<Product />} />
+          <Route path='/products/:productname' element={<ProductDetail />} />
           <Route path='/reviews' element={<Review />} />
           <Route path='/checkout' element={<Checkout />} />
 

@@ -80,6 +80,25 @@ html {
     transform: translate(-50%, -50%);
 }
 
+.add-btn {
+    position: absolute;
+    top: 16px; right: 16px;
+    border: 1px solid #cdcdcd;
+    box-sizing: border-box;
+    border-radius: 12px;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Gilroy;
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+    transition: .4s;
+}
+
 .overlay {
     position: fixed;
     left: 0;

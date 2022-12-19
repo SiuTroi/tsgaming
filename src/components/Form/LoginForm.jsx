@@ -59,12 +59,12 @@ const LoginForm = () => {
                             password: values.password,
                           },
                         });
-                        navigate(`/products/${product.productName}`);
+                        navigate(`/products`);
+                        toast.success("Login successfully!!")
                     }else{
                       setLoginError(true)
                     }
                 })
-                toast.success("Login successfully!!")
               }}
             >
               {({

@@ -53,13 +53,14 @@ const UserPage = () => {
               <h2 className='text-2xl text-blue-500 font-bold text-center'>Beauty.bd</h2>
               <h6 className='text-lg font-medium mb-10'>Sign in to check your order.</h6>
               <Link to={"/login"}>
-                <button  className='w-full bg-blue-500 py-2 rounded-2xl text-white'>
+                <button  className='w-full bg-blue-500 py-2 rounded-2xl hover:bg-blue-600 text-white'
+                onClick={() => dispatch({type: "RESET_CART"})}>
                   Login
                 </button>
               </Link>
               <p className='my-2'>or</p>
               <Link to={"/signup"}>
-                <button className='w-full bg-transparent text-blue-500 border border-solid border-blue-500 py-2 rounded-2xl'>
+                <button className='w-full bg-transparent text-blue-500 border border-solid border-blue-500 hover:bg-blue-600 hover:text-white py-2 rounded-2xl'>
                   Sign up
                 </button>
               </Link>

@@ -5,7 +5,7 @@ const User = () => {
   return (
     <div>
         <Link to={"/user"}>
-            <AiOutlineUser className="text-blue-500 text-2xl" />
+            <AiOutlineUser className="text-blue-500 text-2xl hover:scale-110" />
         </Link>
     </div>
   )

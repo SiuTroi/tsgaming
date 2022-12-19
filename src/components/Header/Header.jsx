@@ -5,8 +5,8 @@ import Navbar from './Navbar'
 
 const Header = () => {
   return (
-    <div className=' bg-white shadow-md '>
-      <div className='flex justify-between items-center py-2 px-4 md:px-0 container mx-auto'>
+    <div className='px-4 lg:px-[12%] sm:px-8 xl:px-[14%] 2xl:px-[16%] bg-white shadow-md '>
+      <div className='flex justify-between items-center py-2'>
         <Navbar />
         <Logo />
         <Cart />
