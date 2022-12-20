@@ -42,7 +42,7 @@ const UserPage = () => {
             </div>
             <div className='mt-12'>
               <button className='w-full bg-blue-500 text-white rounded-2xl py-2' 
-              onClick={() => dispatch({type: "USER_LOGOUT"})}>
+              onClick={() => {dispatch({type: "USER_LOGOUT"}); dispatch({type: "RESET_CART"})}}>
                 Log out
               </button>
             </div>
@@ -53,8 +53,7 @@ const UserPage = () => {
               <h2 className='text-2xl text-blue-500 font-bold text-center'>Beauty.bd</h2>
               <h6 className='text-lg font-medium mb-10'>Sign in to check your order.</h6>
               <Link to={"/login"}>
-                <button  className='w-full bg-blue-500 py-2 rounded-2xl hover:bg-blue-600 text-white'
-                onClick={() => dispatch({type: "RESET_CART"})}>
+                <button  className='w-full bg-blue-500 py-2 rounded-2xl hover:bg-blue-600 text-white'>
                   Login
                 </button>
               </Link>

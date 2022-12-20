@@ -28,7 +28,7 @@ const Product = () => {
       <div className='lg:flex md:gap-4 scroll'>
         <div className='flex flex-wrap gap-2 sm:gap-3 lg:gap-4 justify-center sm:justify-start'>
           {products && products.map(item => (
-            <Link to={`/products/${item.productName}`} key={item.id} className={` md:w-[32%] lg:w-[29%] xl:w-[23.33333%] 
+            <Link to={`/products/${item.productId}`} key={item.productId} className={` md:w-[32%] lg:w-[29%] xl:w-[23.33333%] 
             ${width < 350 ? "w-full" : "w-[48%]"} relative mb-4`}>
               <div className='h-[260px] sm:h-[321px] 2xl:h-[360px] bg-white p-8 rounded-[30px] 
               hover:border-[2px] hover:border-solid hover:border-blue-500 flex justify-center items-center'>

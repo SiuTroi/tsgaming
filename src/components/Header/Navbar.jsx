@@ -1,10 +1,9 @@
-import { NavLink } from "react-router-dom";
-import { BiMenuAltLeft } from "react-icons/bi";
+import { NavLink, useNavigate } from "react-router-dom";
 import { IoHome } from "react-icons/io5"
 import { MdProductionQuantityLimits, MdReviews } from "react-icons/md"
 import { IoChevronBack } from "react-icons/io5";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const navigation = [
   { title: "Home", route: "/", icon: <IoHome /> },
@@ -12,10 +11,8 @@ const navigation = [
   { title: "Review", route: "/reviews", icon: <MdReviews /> },
 ];
 const Navbar = () => {
-  const { product } = useSelector((state) => state.ProductReducer);
-  const [toggleMenu, setToggleMenu] = useState(false);
+  const navigate = useNavigate()
   const dispatch = useDispatch()
-  console.log(product)
   
   useEffect(() => {
     dispatch({
@@ -25,6 +22,10 @@ const Navbar = () => {
 
   return (
     <nav className="w-1/3">
+      <button className="md:hidden text-[28px] text-blue-500"
+      onClick={() => navigate(-1)}>
+        <IoChevronBack />
+      </button>
       <ul className="hidden md:flex items-center gap-8">
         {navigation.map((item) => (
           <NavLink
@@ -44,7 +45,6 @@ const Navbar = () => {
                   key={item.title}
                   to={item.route}
                   className="text-gray-500 flex flex-col items-center"
-                  onClick={() => setToggleMenu(false)}
                 >
                   <div>
                     {item.icon}

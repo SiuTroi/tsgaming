@@ -23,7 +23,7 @@ const ProductList = () => {
               </div>
               <div className='flex justify-between items-center mt-6'>
                 <h3 className='font-semibold'>{formatCurrency(item.price)}</h3>
-                <Link to={`/products/${item.productName}`} onClick={() => window.scrollTo(0,0)}>
+                <Link to={`/products/${item.productId}`} onClick={() => window.scrollTo(0,0)}>
                   <button className='text-blue-500'>Details</button>
                 </Link>
               </div>

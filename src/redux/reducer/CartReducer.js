@@ -10,14 +10,20 @@ const CartReducer = (state = initState, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
       const { product, quantity } = action.payload;
-      const check = state.products.find((pr) => pr.productId === product.productId);
+      const check = state.products.find(
+        (pr) => pr.productId === product.productId
+      );
       if (check) {
-        product.quantity = product?.quantity + quantity;
         return {
           ...state,
+          products: state.products.map((item) =>
+            item.productId === product.productId
+              ? { ...item, quantity: item.quantity + quantity }
+              : item
+          ),
           totalPrice: state.totalPrice + check.price * quantity,
-          totalQuantities: state.totalQuantities + quantity
-        }
+          totalQuantities: state.totalQuantities + quantity,
+        };
       } else {
         const Tprice = state.totalPrice + product.price * quantity;
         const Tquantities = state.totalQuantities + quantity;
@@ -33,7 +39,7 @@ const CartReducer = (state = initState, action) => {
     case "INCREASE":
       findPro = state.products.find((pr) => pr.productId === action.payload);
       index = state.products.findIndex((pr) => pr.productId === action.payload);
-      if(findPro.quantity < 99) {
+      if (findPro.quantity < 99) {
         findPro.quantity += 1;
         state.products[index] = findPro;
         return {
@@ -42,7 +48,7 @@ const CartReducer = (state = initState, action) => {
           totalQuantities: state.totalQuantities + 1,
         };
       } else {
-        return state
+        return state;
       }
     case "DECREASE":
       findPro = state.products.find((pr) => pr.productId === action.payload);
@@ -60,19 +66,21 @@ const CartReducer = (state = initState, action) => {
       }
     case "REMOVE":
       findPro = state.products.find((pr) => pr.productId === action.payload);
-      const filter = state.products.filter((pr) => pr.productId !== action.payload);
+      const filter = state.products.filter(
+        (pr) => pr.productId !== action.payload
+      );
       return {
         ...state,
         products: filter,
         totalPrice: state.totalPrice - findPro.price * findPro.quantity,
         totalQuantities: state.totalQuantities - findPro.quantity,
       };
-    case "RESET_CART": 
+    case "RESET_CART":
       return {
         products: [],
         totalPrice: 0,
-        totalQuantities: 0
-      }
+        totalQuantities: 0,
+      };
     default:
       return state;
   }

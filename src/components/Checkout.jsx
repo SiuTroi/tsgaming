@@ -19,7 +19,7 @@ const CheckOut = () => {
   const dispatch = useDispatch();
   const shippingCost = 10;
 
-  // console.log(!user)
+  console.log(products)
   const dbRef = ref(database);
   useEffect(() => {
     get(child(dbRef, `users`)).then((snapshot) => {
