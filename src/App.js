@@ -9,10 +9,14 @@ import Home from './components/Home'
 import ProductDetail from './components/Product/ProductDetail'
 import Review from './components/Review'
 import UserPage from './components/User/UserPage'
+import Footer from './components/Footer'
+import { useLocation } from 'react-router-dom'
+import "swiper/css";
+import "swiper/css/pagination";
 const Product = lazy(() => import('./components/Product/Product'))
 
-
 const App = () => {
+  const { pathname } = useLocation()
 
   return (
     <div>
@@ -26,12 +30,13 @@ const App = () => {
           <Route path='/checkout' element={<Checkout />} />
 
           <Route path='/user' element={<UserPage />} />
-          <Route path='/historycheckout' element={<HistoryCheckout />} />
+          <Route path='/user/historycheckout' element={<HistoryCheckout />} />
 
           <Route path='/login' element={<LoginForm />} />
           <Route path='/signup' element={<SignupForm />} />
         </Routes>
       </Suspense>
+      {pathname === "/checkout" ? <div></div> : <Footer />}
     </div>
   )
 }

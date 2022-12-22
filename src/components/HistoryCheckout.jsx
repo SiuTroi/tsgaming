@@ -29,13 +29,8 @@ const HistoryCheckout = () => {
     getHisByUserid()
   }, []);
 
-  const handleCancelHis = async (indexRemove) => {
-    const db = getFirestore()
-    await deleteDoc(doc(db, `users`, `/${user.userid}/historycheckout/${indexRemove}`));
-  } 
-
     return (
-    <div className="px-4 max-w-xl mx-auto">
+    <div className="px-4 max-w-xl mx-auto mt-20">
       {isLoading && <div className='overlay z-9999'><div className='absolute-center loading'></div></div>}
       <div className="mt-8">
         <h1 className="text-center font-semibold text-[32px]">History Checkout</h1>

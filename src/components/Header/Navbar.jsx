@@ -21,7 +21,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="w-1/3">
+    <nav className="">
       <button className="md:hidden text-[28px] text-blue-500"
       onClick={() => navigate(-1)}>
         <IoChevronBack />
@@ -37,8 +37,8 @@ const Navbar = () => {
           </NavLink>
         ))}
       </ul>
-      <div className="fixed z-50 left-0 right-0 bottom-0 w-full shadow-3xl md:hidden">
-          <div className=" bg-white border-t border-solid border-gray-200 px-6 pt-4 pb-2">
+      <div className="fixed h-16 z-50 left-0 right-0 bottom-0 w-full shadow-3xl md:hidden">
+          <div className=" bg-white h-full border-t border-solid border-black px-6 pt-4 pb-2">
             <ul className="w-full flex justify-between gap-3">
               {navigation.map((item) => (
                 <NavLink

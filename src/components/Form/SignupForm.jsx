@@ -36,7 +36,7 @@ const SignUpForm = () => {
         </div>
       )}
       <div className="">
-        <div className="max-w-lg mx-auto px-16 pt-16 pb-24 mt-12 bg-white rounded-2xl shadow-xl">
+        <div className="max-w-lg mx-auto px-16 pt-16 pb-24 mt-20 bg-white rounded-2xl shadow-xl">
           <div className="">
             <div className="text-right">
               <button
@@ -47,17 +47,17 @@ const SignUpForm = () => {
               </button>
             </div>
             <div>
-              <h1 className="h1 font-semibold text-[28px]">Đăng ký</h1>
+              <h1 className="h1 font-semibold text-[28px]">Sign up</h1>
               <p className="mb-8 font-light text-[14px]">
-                Bạn đã có sẵn tài khoản?{" "}
+                You have an account?{" "}
                 <Link to={"/login"} className="text-blue-600 font-normal">
-                  Đăng nhập tại đây
+                  Login here
                 </Link>
               </p>
             </div>
             <div className=""></div>
             <div className="divider mt-4">
-              <span className="uppercase text-[#8c98a4]">Hoặc</span>
+              <span className="uppercase text-[#8c98a4]">Or</span>
             </div>
             <Formik
               initialValues={{
@@ -79,7 +79,7 @@ const SignUpForm = () => {
                   .required("email is required!"),
                 password: Yup.string().required("password is required!"),
                 passwordConfirmed: Yup.string()
-                  .oneOf([Yup.ref("password"), null], "Mật khẩu không khớp!")
+                  .oneOf([Yup.ref("password"), null], "password not match!")
                   .required("passwordConfirmed is required!"),
               })}
               onSubmit={(values, { setSubmitting }) => {
@@ -199,7 +199,7 @@ const SignUpForm = () => {
                           : "border-[#ededed]"
                       }`}
                       value={values.password}
-                      placeholder="Mật khẩu"
+                      placeholder="Password"
                     />
                     <p className="text-red-600 text-left font-light text-[12px]">
                       {errors.password && touched.password && errors.password}
@@ -220,7 +220,7 @@ const SignUpForm = () => {
                           : "border-[#ededed]"
                       } `}
                       value={values.passwordConfirmed}
-                      placeholder="Nhập lại mật khẩu"
+                      placeholder="Passowrd comfirmed"
                     />
                     <p className="text-red-600 text-left font-light text-[12px]">
                       {errors.passwordConfirmed &&

@@ -82,7 +82,8 @@ html {
 
 .add-btn {
     position: absolute;
-    top: 16px; right: 16px;
+    top: 16px;
+    right: 16px;
     border: 1px solid #cdcdcd;
     box-sizing: border-box;
     border-radius: 12px;
@@ -110,12 +111,15 @@ html {
     height: 100%;
     z-index: 999;
 }
+
 .z-9999 {
     z-index: 9999 !important;
 }
+
 .border-red {
     border: 1px solid red !important;
 }
+
 .modal-animation {
     animation: modalAnimation .2s ease-in-out;
 }
@@ -124,7 +128,34 @@ html {
     from {
         transform: scale(0);
     }
+
     to {
         transform: scale(1);
+    }
+}
+
+.border-blue-hover:hover {
+    border: 1px solid blue !important;
+}
+
+@layer components {
+    .category-page {
+        @apply px-4 mt-20 lg:px-8 xl:px-0 xl:mx-[10%] 2xl:mx-[16%]
+    }
+
+    .add-btn {
+        @apply ml-[82%] mb-1 p-2 rounded-xl bg-transparent hover:bg-blue-500 hover:text-white transition-all duration-500
+    }
+
+    .wrap-product {
+        @apply flex flex-wrap gap-2 xl:justify-start px-2
+    }
+
+    .item-product {
+        @apply w-[48%] sm:w-[49%] md:w-[32%] lg:w-[24%] h-[22rem] bg-white rounded-2xl p-3
+    }
+
+    .img-product {
+        @apply mt-3 h-[8rem] xl:h-[8.5rem] flex justify-center items-center
     }
 }

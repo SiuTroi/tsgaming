@@ -23,7 +23,7 @@ const UserPage = () => {
   }, [user.userid])
 
   return (
-    <div className='max-w-md mx-auto'>
+    <div className='max-w-md mx-auto mt-16'>
       <div>
         {users.find(item => item?.userid === user?.userid) ? (
           <div className='px-16 pt-16 pb-32  mt-12 mx-4 bg-white rounded-2xl shadow-lg'>
@@ -38,11 +38,11 @@ const UserPage = () => {
               </div>
             </div>
             <div className='mt-12'>
-              <Link to={"/historycheckout"}><b>-</b> <span className="underline">History checkout</span> </Link>
+              <Link to={"/user/historycheckout"}><b>-</b> <span className="underline">History checkout</span> </Link>
             </div>
             <div className='mt-12'>
               <button className='w-full bg-blue-500 text-white rounded-2xl py-2' 
-              onClick={() => {dispatch({type: "USER_LOGOUT"}); dispatch({type: "RESET_CART"})}}>
+              onClick={() => dispatch({type: "USER_LOGOUT"})}>
                 Log out
               </button>
             </div>

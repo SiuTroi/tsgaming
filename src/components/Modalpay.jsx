@@ -4,7 +4,6 @@ import { database } from "../firebase";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { AiOutlineClose } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -65,7 +64,7 @@ const Modalpay = ({ setIsShowModalPay }) => {
                     <AiOutlineClose size={24} />
                 </button>
                 <div>
-                    <h1 className='h1 text-[22px]'>Thông tin thanh toán</h1>
+                    <h1 className='h1 text-[22px]'>Information checkout</h1>
                     <Formik
                         initialValues={{ 
                             fullName: "",
