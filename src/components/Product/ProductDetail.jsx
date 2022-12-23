@@ -36,8 +36,7 @@ const ProductDetail = () => {
             <p className='mt-2 text-gray-500'>{product?.description}</p>
             <div className='mt-8 md:mt-20 flex justify-between items-center'>
               <div className='bg-gray-200 w-[90px] flex items-center justify-around rounded-md'>
-                <button 
-                className={`px-2 text-[22px] ${quantity === 1 && "cursor-not-allowed"}`} 
+                <button className={`px-2 text-[22px] ${quantity === 1 && "cursor-not-allowed"}`} 
                 disabled={quantity === 1 && true}
                 onClick={() => quantity > 1 && setQuantity(quantity - 1)}>-</button>
                 {quantity}

@@ -30,7 +30,7 @@ const ProductList = () => {
             </div>
           </div>
         ))}
-        {loadmore < products.length && <button onClick={() => setLoadmore(loadmore + 5)}
+        {loadmore < products.length && <button onClick={() => setLoadmore(loadmore + 4)}
         className="bg-blue-500 rounded-xl text-white w-[160px] py-2 mx-auto mt-3 hover:bg-blue-600">Load more</button>}
       </div>
     </div>

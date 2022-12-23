@@ -1,4 +1,3 @@
-import comingsoon from "../assets/comming-soon.png"
 import Favorite from "./Home/Favorite"
 import FeaturedProduct from "./Home/FeaturedProduct"
 import HomeSingleFeatureProduct from "./Home/HomeSingleFeatureProduct"

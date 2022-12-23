@@ -33,7 +33,7 @@ const Search = ({ setSearchToggle }) => {
         rounded-tl-3xl rounded-tr-3xl overflow-hidden relative md:h-[100vh] md:mt-0 md:rounded-none "
       >
         <div className="max-w-[96vw] flex justify-around items-center pt-8 px-2 md:py-4 md:border-b-[8px] md:border-solid md:border-[#115e5c]">
-          <button onClick={() => setSearchToggle(false)}>
+          <button className="hidden md:block" onClick={() => setSearchToggle(false)}>
             <Logo />
           </button>
           <div className="flex bg-white items-center rounded-xl w-[60%] overflow-hidden sm:max-w-[440px] md:min-w-[400px] ">
@@ -65,7 +65,7 @@ const Search = ({ setSearchToggle }) => {
           )}
           <div className="wrap-product">
             {productSearch.map((item) => (
-              <div className="item-product relative border-blue-hover">
+              <div key={item.productId} className="item-product relative border-blue-hover">
                 <button
                   className="add-btn"
                   onClick={() => {
@@ -80,7 +80,7 @@ const Search = ({ setSearchToggle }) => {
                 </button>
                 <Link
                   to={`/products/${item.productId}`}
-                  key={item?.productId}
+                  key={item.productId}
                   onClick={() => {
                     setSearchToggle(false);
                     window.scrollTo(0, 0);
@@ -88,13 +88,13 @@ const Search = ({ setSearchToggle }) => {
                 >
                   <div className="img-product">
                     <img
-                      src={item?.imageUrl}
-                      alt={item?.productName}
+                      src={item.imageUrl}
+                      alt={item.productName}
                       className="h-full"
                     />
                   </div>
                   <div className="flex-1">
-                    <h2 className="mt-8 mb-2">{item?.productName}</h2>
+                    <h2 className="mt-8 mb-2">{item.productName}</h2>
                     <h2 className="font-bold">{formatCurrency(item.price)}</h2>
                     <p className="line-through text-gray-300">
                       {formatCurrency(item.price * 3)}

@@ -2,6 +2,11 @@ const userInit = {}
 
 const UserReducer = (state = userInit, action) => {
     switch(action.type) {
+        case "GET_USER_DATA": 
+            return {
+                ...state,
+                users: action.payload
+            }
         case "USER_LOGIN": 
             const { userid, username, email, password } = action.payload;
             return {

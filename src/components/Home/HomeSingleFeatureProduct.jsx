@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar } from "react-icons/ai";
 import { BsStarHalf } from "react-icons/bs";
 import { CiShoppingCart } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { formatCurrency } from "../../utils/currencyFormart";
+import { toast } from "react-toastify";
 
 const HomeSingleFeatureProduct = () => {
   const {products} = useSelector(state => state.ProductReducer)
@@ -51,10 +51,10 @@ const HomeSingleFeatureProduct = () => {
                 </div>
                 <div className="flex items-center flex-wrap gap-3">
                   <h2 className="font-bold">
-                    {formatCurrency(products[9].price)}
+                    {formatCurrency(products[9]?.price)}
                   </h2>
                   <p className="text-gray-400 line-through">
-                    {formatCurrency(products[9].price * 6)}
+                    {formatCurrency(products[9]?.price * 6)}
                   </p>
                 </div>
               </div>
@@ -76,11 +76,11 @@ const HomeSingleFeatureProduct = () => {
                   <button
                     className="w-full flex justify-center items-center py-4 text-white bg-[#fe7c22] hover:bg-[#fb700d] gap-2 rounded-xl
                      transition-all duration-500"
-                    onClick={() =>
+                    onClick={() =>{
                       dispatch({
                         type: "ADD_TO_CART",
                         payload: { product: products[9], quantity: quantity },
-                      })
+                      }); toast.success("Added product successfully!!")}
                     }
                   >
                     <CiShoppingCart color="white" size={18} />

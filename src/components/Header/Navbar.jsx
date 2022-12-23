@@ -5,6 +5,7 @@ import { IoChevronBack } from "react-icons/io5";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
+// data navigation
 const navigation = [
   { title: "Home", route: "/", icon: <IoHome /> },
   { title: "Products", route: "/products", icon: <MdProductionQuantityLimits /> },
@@ -38,7 +39,7 @@ const Navbar = () => {
         ))}
       </ul>
       <div className="fixed h-16 z-50 left-0 right-0 bottom-0 w-full shadow-3xl md:hidden">
-          <div className=" bg-white h-full border-t border-solid border-black px-6 pt-4 pb-2">
+          <div className=" bg-white h-full border-t border-solid border-gray-400 px-6 pt-4 pb-2">
             <ul className="w-full flex justify-between gap-3">
               {navigation.map((item) => (
                 <NavLink

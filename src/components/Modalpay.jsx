@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { ref, child, get, set } from "firebase/database";
+import { ref, child, set } from "firebase/database";
 import { database } from "../firebase";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -8,19 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 const Modalpay = ({ setIsShowModalPay }) => {
-    const [users, setUsers] = useState([]);
-    const { products } = useSelector((state) => state.CartReducer);
+    const { users } = useSelector((state) => state.UserReducer);
     const user = useSelector((state) => state.UserReducer);
+    const { products } = useSelector((state) => state.CartReducer);
     const dispatch = useDispatch()
     const dbRef = ref(database);
-
-    useEffect(() => {
-        get(child(dbRef, `users`)).then((snapshot) => {
-          if (snapshot.exists()) {
-            setUsers(snapshot.val());
-          }
-        });
-      }, []);
     
     const handleCheckout = (values) => {
         if(window.confirm("Confirm this is the address to receive the goods?")){

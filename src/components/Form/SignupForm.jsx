@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { ref, child, get, set } from "firebase/database";
+import { useState } from "react";
+import { ref, child, set } from "firebase/database";
 import { database } from "../../firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -9,25 +9,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const SignUpForm = () => {
+  const { users } = useSelector(state => state.UserReducer)
   const [loading, setLoading] = useState(false);
-  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const dbRef = ref(database);
-
-  useEffect(() => {
-    get(child(dbRef, `users`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setUsers(snapshot.val());
-        } else {
-          console.log("No data available");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
   return (
     <>
       {loading && (
@@ -35,7 +21,7 @@ const SignUpForm = () => {
           <div className="absolute-center loading"></div>
         </div>
       )}
-      <div className="">
+      <div className="px-2">
         <div className="max-w-lg mx-auto px-16 pt-16 pb-24 mt-20 bg-white rounded-2xl shadow-xl">
           <div className="">
             <div className="text-right">
@@ -70,11 +56,12 @@ const SignUpForm = () => {
               validationSchema={Yup.object({
                 firstName: Yup.string().required("firstName is required!"),
                 lastName: Yup.string().required("lastName is required!"),
+                // Check email user signup must not coincide with any email on system
                 email: Yup.string()
-                  .email("E-mail không hợp lệ.")
+                  .email("E-mail not valid!")
                   .notOneOf(
                     users.map((item) => item.email),
-                    "Email already exists in the system."
+                    "Email already exists in the system!"
                   )
                   .required("email is required!"),
                 password: Yup.string().required("password is required!"),
@@ -85,6 +72,7 @@ const SignUpForm = () => {
               onSubmit={(values, { setSubmitting }) => {
                 setLoading(true);
                 setTimeout(() => {
+                  // (set) Data push to firebase
                   set(child(dbRef, `users/${users.length}`), {
                     email: values.email,
                     password: values.password,
@@ -103,7 +91,7 @@ const SignUpForm = () => {
                   });
                   setSubmitting(false);
                   setLoading(false);
-                  navigate(`/products`);
+                  navigate(`/`);
                   toast.success("Signup successfully!!");
                 }, 1000);
               }}
@@ -184,7 +172,6 @@ const SignUpForm = () => {
                     <p className="text-red-600 text-left font-light text-[12px]">
                       {errors.email && touched.email && errors.email}
                     </p>
-                    {/* <p>{users.map(item => item.email === values.email) ? "Email already exists in the system." : ""}</p> */}
                   </div>
                   <div className="w-full my-4">
                     <input

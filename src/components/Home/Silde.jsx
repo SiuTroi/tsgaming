@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import {IoIosArrowBack} from "react-icons/io"
-import {MdNavigateNext} from "react-icons/md"
+import { useSelector } from 'react-redux';
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper";
 
 import specialoffer from "../../assets/specialoffer.png"
 import savingmoney from "../../assets/savingmoney.png"
 import freeship from "../../assets/freeship.png"
-import { useSelector } from 'react-redux';
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper";
 
 
+// amotions data array
 const amotions = [
   {
     img: specialoffer,
@@ -31,6 +30,7 @@ const Slide = () => {
     const { products } = useSelector(state => state.ProductReducer)
   return (
     <div className='mt-32 px-4 xl:mx-[10%] 2xl:mx-[16%]'>
+      {/* Swiper libary */}
       <Swiper
         autoplay={{
           delay: 2500,
@@ -48,17 +48,18 @@ const Slide = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper bg-white h-[30vh] md:h-[50vh] pt-10 rounded-3xl px-6"
       >
-        {products.map((item, index) => (
-          <SwiperSlide key={index}>
-            <img src={item.imageUrl} alt={item.productName} 
-          className="rounded-3xl homeSlide" /></SwiperSlide>
+        {products.map((item) => (
+          <SwiperSlide key={item.productId}>
+            <img src={item.imageUrl} alt={item.productName} className="rounded-3xl homeSlide" />
+          </SwiperSlide>
         ))}
       </Swiper>
       <div className='px-4 flex justify-between mt-16 sm:mt-24'>
+        {/* Render amotions */}
         {amotions.map((item, index) => (
           <div key={index} className="w-[32%] bg-[#ededed] p-2 sm:p-4 lg:py-6 rounded-lg lg:flex lg:flex-row-reverse amotions" >
-            <div className="mx-auto translate-y-[-60%] sm:translate-y-[-50%] md:translate-y-[-40%] lg:translate-y-[-10%] w-[75%] lg:w-[220px]
-                 lg:flex lg:justify-center lg:items-center">
+            <div className="mx-auto translate-y-[-60%] sm:translate-y-[-50%] md:translate-y-[-40%] lg:translate-y-[-10%] 
+            w-[75%] lg:w-[220px] lg:flex lg:justify-center lg:items-center">
               <img src={item.img} alt={item.img} 
               className=""/>
             </div>

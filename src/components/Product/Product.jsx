@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatCurrency } from "../../utils/currencyFormart";
 import { AiOutlineClose } from "react-icons/ai";
-import { FcFilledFilter } from "react-icons/fc"
+import { FcFilledFilter } from "react-icons/fc";
 import { toast } from "react-toastify";
 
 const Product = () => {
@@ -11,7 +11,7 @@ const Product = () => {
   const [isShowModalFilter, setShowModalFilter] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const [productMap, setProductMap] = useState(products);
-  const [isCancelFilter, setCancelFilter] = useState(false)
+  const [isCancelFilter, setCancelFilter] = useState(false);
   const [filterValue, setFilterValue] = useState({
     from: "",
     to: "",
@@ -27,25 +27,26 @@ const Product = () => {
   };
 
   const handleFilter = () => {
+    // filter product follow by price
     const getFilterProduct = (from, to) =>
       products.filter((item) => item.price > from && item.price < to);
     const productFilter = getFilterProduct(filterValue.from, filterValue.to);
 
+    // set productMap follow by isShowModalFilter false or true
     const x = isShowModalFilter ? productFilter : products;
     setProductMap(x);
-    setCancelFilter(true)
-    setShowModalFilter(false)
+    setCancelFilter(true);
+    setShowModalFilter(false);
   };
 
   const handleCancelFilter = () => {
-    setCancelFilter(false)
-    setProductMap(products)
-  }
+    setCancelFilter(false);
+    setProductMap(products);
+  };
 
-  useEffect(() => {
-    dispatch({ type: "GET_PRODUCT" });
-  }, []);
 
+
+  // Responesive for screen < 350
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
@@ -62,8 +63,13 @@ const Product = () => {
           All Product
         </h1>
         {isCancelFilter ? (
-          <button onClick={handleCancelFilter}
-          className="bg-transparent px-6 py-2 rounded-2xl shadow-2xl hover:bg-blue-500 hover:text-white transition-all duration-500">Cancel filter</button>
+          <button
+            onClick={handleCancelFilter}
+            className="bg-transparent px-6 py-2 rounded-2xl shadow-2xl hover:bg-blue-500 hover:text-white 
+            transition-all duration-500"
+          >
+            Cancel filter
+          </button>
         ) : (
           <button
             className="flex gap-2 items-center mr-6"
@@ -77,7 +83,9 @@ const Product = () => {
           <div className="overlay">
             <div className="w-full md:w-[40vw] xl:w-[30vw] bg-white h-full ml-auto p-6">
               <div className="flex items-center">
-                <h1 className="flex-1 text-center font-bold text-2xl text-blue-500">Filter by price</h1>{" "}
+                <h1 className="flex-1 text-center font-bold text-2xl text-blue-500">
+                  Filter by price
+                </h1>{" "}
                 <button onClick={() => setShowModalFilter(false)}>
                   <AiOutlineClose size={24} />
                 </button>
@@ -116,7 +124,8 @@ const Product = () => {
               </div>
               <div className="flex justify-end">
                 <button
-                  className="bg-transparent px-6 py-2 rounded-2xl shadow-2xl hover:bg-blue-500 hover:text-white transition-all duration-500"
+                  className="bg-transparent px-6 py-2 rounded-2xl shadow-2xl hover:bg-blue-500 hover:text-white 
+                  transition-all duration-500"
                   onClick={handleFilter}
                 >
                   Apply
@@ -128,49 +137,57 @@ const Product = () => {
       </div>
       <div className="lg:flex md:gap-4 scroll">
         <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4 justify-center sm:justify-start">
-          {productMap.length > 0 ? productMap.map((item) => (
-            <div
-              key={item.productId}
-              className={`relative md:w-[32%] lg:w-[24vw] xl:w-[17vw] 2xl:w-[16vw]
+          {productMap.length > 0 ? (
+            productMap.map((item) => (
+              <div
+                key={item.productId}
+                className={`relative md:w-[32%] lg:w-[24vw] xl:w-[17vw] 2xl:w-[16vw]
             ${width < 350 ? "w-full" : "w-[48%]"} relative mb-4`}
-            >
-              <button
-                className="add-btn hover:bg-blue-500 hover:text-white"
-                onClick={() => {
-                  dispatch({
-                    type: "ADD_TO_CART",
-                    payload: { product: item, quantity: 1 },
-                  });
-                  toast.success("Added product successfully!!");
-                }}
               >
-                +
-              </button>
-              <Link to={`/products/${item.productId}`}>
-                <div
-                  className="h-[260px] sm:h-[321px] 2xl:h-[360px] bg-white p-8 rounded-[30px] 
-                hover:border-[2px] hover:border-solid hover:border-blue-500 flex justify-center items-center"
+                <button
+                  className="add-btn hover:bg-blue-500 hover:text-white"
+                  onClick={() => {
+                    dispatch({
+                      type: "ADD_TO_CART",
+                      payload: { product: item, quantity: 1 },
+                    });
+                    toast.success("Added product successfully!!");
+                  }}
                 >
-                  <img
-                    src={item.imageUrl}
-                    alt=""
-                    className="h-full mx-auto min-w-[120px] sm:w-full md:h-[215px] object-contain"
-                  />
-                </div>
-                <div className="">
-                  <h1 className="mt-2 mb-3 font text-[#4d4d4d]">
-                    {item.productName}
-                  </h1>
-                  <span className="font-extrabold text-[20px] mr-2">
-                    {formatCurrency(item.price)}
-                  </span>{" "}
-                  <span className="line-through text-gray-400">
-                    {formatCurrency(item.price * 3)}
-                  </span>
-                </div>
-              </Link>
+                  +
+                </button>
+                <Link to={`/products/${item.productId}`}>
+                  <div
+                    className="h-[260px] sm:h-[321px] 2xl:h-[360px] bg-white p-8 rounded-[30px] 
+                    hover:border-[2px] hover:border-solid hover:border-blue-500 flex justify-center items-center"
+                  >
+                    <img
+                      src={item.imageUrl}
+                      alt=""
+                      className="h-full mx-auto min-w-[120px] sm:w-full md:h-[215px] object-contain"
+                    />
+                  </div>
+                  <div className="">
+                    <h1 className="mt-2 mb-3 font text-[#4d4d4d]">
+                      {item.productName}
+                    </h1>
+                    <span className="font-extrabold text-[20px] mr-2">
+                      {formatCurrency(item.price)}
+                    </span>{" "}
+                    <span className="line-through text-gray-400">
+                      {formatCurrency(item.price * 3)}
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <div className="h-[50vh] mt-8 ml-4">
+              <h1 className="text-center font-medium text-2xl">
+                There are no matching products for this filter
+              </h1>
             </div>
-          )) : <div className="h-[50vh] mt-8 ml-4"><h1 className="text-center font-medium text-2xl">There are no matching products for this filter</h1></div>}
+          )}
         </div>
       </div>
     </div>

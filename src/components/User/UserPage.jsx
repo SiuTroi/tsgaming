@@ -1,31 +1,18 @@
 import React from 'react';
-import { ref, child, get, set } from "firebase/database";
-import { database } from '../../firebase';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineUser } from 'react-icons/ai';
 
 const UserPage = () => {
-  const [users, setUsers] = useState([])
+  const { users } = useSelector(state => state.UserReducer)
   const user = useSelector(state => state.UserReducer)
   const dispatch = useDispatch()
 
 
-  useEffect(() => {
-    const dbRef = ref(database);
-    get(child(dbRef, `users`)).then((snapshot) => {
-      if(snapshot.exists()) {
-        setUsers(snapshot.val())
-      }
-    })
-  }, [user.userid])
-
   return (
-    <div className='max-w-md mx-auto mt-16'>
+    <div className='max-w-md mx-auto mt-24'>
       <div>
-        {users.find(item => item?.userid === user?.userid) ? (
+        {users && users.find(item => item?.userid === user?.userid) ? (
           <div className='px-16 pt-16 pb-32  mt-12 mx-4 bg-white rounded-2xl shadow-lg'>
             <div  className='flex items-center gap-4'>
               <div className='w-[50px] h-[50px] flex justify-center items-center rounded-full 

@@ -1,28 +1,18 @@
 import { Formik } from "formik";
-import { ref, child, get } from "firebase/database";
-import { database } from "../../firebase";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
 
 const LoginForm = () => {
-  const [users, setUsers] = useState([]);
+  const { users } = useSelector(state => state.UserReducer)
   const [loading, setLoading] = useState(false)
   const [isLoginError, setLoginError] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const dbRef = ref(database);
 
-  useEffect(() => {
-    get(child(dbRef, `users`)).then((snapshot) => {
-      if (snapshot.exists()) {
-        setUsers(snapshot.val());
-      }
-    });
-  }, []);
 
   return (
     <div className="px-2">
@@ -46,7 +36,7 @@ const LoginForm = () => {
             </p>
         </div>
         <Formik
-          initialValues={{ email: "", password: "", loginError: "" }}
+          initialValues={{ email: "", password: ""}}
           validationSchema={Yup.object({
             email: Yup.string()
               .email("E-mail not valid!")
@@ -56,7 +46,8 @@ const LoginForm = () => {
           onSubmit={(values, { setSubmitting }) => {
             setLoading(true)
             setTimeout(() => {
-              users.map((item) => {
+              users.map(item => {
+                // Check user account with account on system
                 if (
                   values.email === item.email &&
                   values.password === item.password
@@ -71,7 +62,6 @@ const LoginForm = () => {
                     },
                   });
                   navigate(`/`);
-                  setLoading(false)
                   toast.success("Login successfully!!");
                 } else {
                   setLoginError(true);
@@ -128,6 +118,7 @@ const LoginForm = () => {
                 <p className="text-red-600 text-left font-light text-[14px]">
                   {errors.password && touched.password && errors.password}
                 </p>
+                {/* Validate when wrong user accont */}
                 {isLoginError && (
                   <p className="text-red-600 text-left font-light">
                     wrong email or password!
