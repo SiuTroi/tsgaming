@@ -12,8 +12,7 @@ const LoginForm = () => {
   const [isLoginError, setLoginError] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-
+  console.log(users)
   return (
     <div className="px-2">
       <div className="max-w-lg mx-auto mt-20 px-16 pt-16 pb-24 bg-white rounded-2xl shadow-xl">

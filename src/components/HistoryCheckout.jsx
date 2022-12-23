@@ -30,7 +30,7 @@ const HistoryCheckout = () => {
   }, []);
 
     return (
-    <div className="px-4 max-w-xl mx-auto mt-20">
+    <div className="px-4 max-w-xl mx-auto mt-20 pb-24">
       {isLoading && <div className='overlay z-9999'><div className='absolute-center loading'></div></div>}
       <div className="mt-8">
         <h1 className="text-center font-semibold text-[32px]">History Checkout</h1>

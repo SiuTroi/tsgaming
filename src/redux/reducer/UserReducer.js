@@ -1,4 +1,6 @@
-const userInit = {}
+const userInit = {
+    users: []
+}
 
 const UserReducer = (state = userInit, action) => {
     switch(action.type) {

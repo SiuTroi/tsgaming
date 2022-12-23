@@ -44,8 +44,6 @@ const Product = () => {
     setProductMap(products);
   };
 
-
-
   // Responesive for screen < 350
   useEffect(() => {
     const handleResize = () => {

@@ -14,6 +14,7 @@ const SignUpForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const dbRef = ref(database);
+
   return (
     <>
       {loading && (
@@ -60,7 +61,7 @@ const SignUpForm = () => {
                 email: Yup.string()
                   .email("E-mail not valid!")
                   .notOneOf(
-                    users.map((item) => item.email),
+                    users.length > 0 ? users.map((item) => item.email) : [],
                     "Email already exists in the system!"
                   )
                   .required("email is required!"),
