@@ -1,12 +1,7 @@
-import axios from "axios";
+
 import { call, put, takeLatest } from "redux-saga/effects";
 import { ref, child, get } from "firebase/database";
 import { database } from "../../firebase";
-const getProductAsync = async () => {
-  const respone = await axios.get("https://api.npoint.io/beef3d4f5c122e5a014a");
-  const data = await respone.data;
-  return data;
-};
 
 const dbRef = ref(database);
 const getUserAsync = async () => {
@@ -18,17 +13,26 @@ const getUserAsync = async () => {
   return userRespone;
 };
 
-function* getData() {
-  const productData = yield call(getProductAsync);
-  const userData = yield call(getUserAsync);
-
-  yield put({
-    type: "GET_ALL_PRODUCT",
-    payload: productData,
+const getProductDataAsync = async () => {
+  const productDataRespone = await get(child(dbRef, `product_data`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      return snapshot.val()
+    }
   });
+  return productDataRespone;
+};
+
+function* getData() {
+  const userData = yield call(getUserAsync);
+  const product_data = yield call(getProductDataAsync);
+
   yield put({
     type: "GET_USER_DATA",
     payload: userData,
+  });
+  yield put({
+    type: "GET_PRODUCT_DATA",
+    payload: product_data,
   });
 }
 

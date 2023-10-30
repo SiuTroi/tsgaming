@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 
 // data navigation
 const navigation = [
-  { title: "Home", route: "/", icon: <IoHome /> },
-  { title: "Products", route: "/products", icon: <MdProductionQuantityLimits /> },
-  { title: "Review", route: "/reviews", icon: <MdReviews /> },
+  { title: "Trang Chủ", route: "/", icon: <IoHome /> },
+  { title: "Shopping", route: "/products", icon: <MdProductionQuantityLimits /> },
+  { title: "Gaming Blogs", route: "/blogs", icon: <MdReviews /> },
 ];
 const Navbar = () => {
   const navigate = useNavigate()
@@ -27,11 +27,11 @@ const Navbar = () => {
       onClick={() => navigate(-1)}>
         <IoChevronBack />
       </button>
-      <ul className="hidden md:flex items-center gap-8">
+      <ul className="hidden md:flex items-center">
         {navigation.map((item) => (
           <NavLink
             key={item.title}
-            className="text-gray-500 text-lg"
+            className="text-gray-500 text-lg px-2 text-[16px]"
             to={item.route}
           >
           {item.title}

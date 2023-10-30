@@ -1,6 +1,6 @@
 import comingsoon from "../assets/comming-soon.png"
 
-const Review = () => {
+const Blogs = () => {
   return (
     <div className='container mx-auto mt-20'>
       <div className='flex justify-center items-center'>
@@ -10,4 +10,4 @@ const Review = () => {
   )
 }
 
-export default Review
+export default Blogs

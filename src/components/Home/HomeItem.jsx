@@ -1,59 +1,71 @@
-import { useDispatch } from "react-redux";
-import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { formatCurrency } from "../../utils/currencyFormart";
-import { toast } from "react-toastify";
+import { MdProductionQuantityLimits } from "react-icons/md";
+import { useEffect, useState } from "react";
 
 const HomeItem = (props) => {
-  const { data, title } = props;
-  const dispatch = useDispatch();
+  const { data, title, className, isShowAllButton } = props;
+  const [hasLoadDataDone, setHasLoadDataDone] = useState(false);
+
+  useEffect(() => {
+    !data ? setHasLoadDataDone(false) : setHasLoadDataDone(true);
+  }, [data]);
+
+
   return (
-    <div className="category-page mb-3">
-      <div>
+    <div className={`category-page mb-3 ${className}`}>
+      <div className="px-2">
         <h2 className="text-blue-500 text-[32px] mb-3 font-bold">{title}</h2>
       </div>
-      <div>
-        <div className="wrap-product">
-          {data.map((item) => (
-            <div key={item.productId} className="item-product border-blue-hover relative">
-              <button
-                className="add-btn hover:bg-blue-500 hover:text-white transition-all duration-500"
-                onClick={() =>{
-                  dispatch({
-                    type: "ADD_TO_CART",
-                    payload: { product: item, quantity: 1 },
-                  }); toast.success("Added product successfully!!")}
-                }
-              >
-                <AiOutlinePlus size={12} />
-              </button>
-              <Link
-                to={`/products/${item.productId}`}
+      {!hasLoadDataDone ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          <div className="wrap-product">
+            {data.map((item, index) => (
+              <div
+                key={index}
+                className="item-product border-blue-hover relative"
                 onClick={() => window.scrollTo(0, 0)}
               >
-                <div className="img-product">
-                  <img src={item.imageUrl} alt={item.productName} className="h-full" />
-                </div>
-                <p className="mt-12 mb-2 three-dot">{item.productName}</p>
-                <h2 className="font-bold">
-                  {formatCurrency(item.price)}
-                </h2>
-                <p className="text-gray-400 line-through">
-                  {formatCurrency(item.price * 3)}
-                </p>
-              </Link>
-            </div>
-          ))}
+                <a
+                  href={item.productLink}
+                  className="add-btn hover:bg-blue-500 hover:text-white transition-all duration-500"
+                >
+                  <MdProductionQuantityLimits size={12} />
+                </a>
+                <Link
+                  to={`/products/product-detail/${item.productId}`}
+                  onCick={() => window.scrollTo(0, 0)}
+                >
+                  <div className="img-product">
+                    <img
+                      src={item.productImage}
+                      alt={item.productName}
+                      className="h-full rounded-2xl"
+                    />
+                  </div>
+                  <p className="mt-12 mb-2 truncate three-dot">
+                    {item.productName}
+                  </p>
+                  <h2 className="font-bold">{item.productPrice} VND</h2>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
+
       <div className="flex justify-center mt-6">
-          <button
+        {!isShowAllButton && (
+          <Link
             className="px-8 py-3 bg-transparent border-solid border border-blue-500 text-blue-500 rounded-lg bg-green-hover 
             hover:bg-blue-500 hover:text-white transition-all duration-500"
             onClick={() => window.scrollTo(0, 0)}
+            to={"/products"}
           >
-            See all
-          </button>
+            Tất cả
+          </Link>
+        )}
       </div>
     </div>
   );

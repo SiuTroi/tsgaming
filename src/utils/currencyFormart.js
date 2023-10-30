@@ -1,5 +1,5 @@
-const CURRENCY_FORMAT = new Intl.NumberFormat('en-US', {
-    currency: "USD",
+const CURRENCY_FORMAT = new Intl.NumberFormat('vi-VN', {
+    currency: "VND",
     style: "currency"
 })
 

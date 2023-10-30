@@ -15,6 +15,7 @@ const SignUpForm = () => {
   const dispatch = useDispatch();
   const dbRef = ref(database);
 
+  console.log(users)
   return (
     <>
       {loading && (

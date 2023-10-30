@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware  } from "redux"
 import reduxSaga from "redux-saga";
 import callApiAsync from "../saga/asyncSaga";
-import ProductReducer from "../reducer/ProductReducer"
 import CartReducer from "../reducer/CartReducer"
 import UserReducer from "../reducer/UserReducer"
+import ProductDataReducer from "../reducer/ProductDataReducer"
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
@@ -14,9 +14,9 @@ const persistConfig = {
 
 const middleware =reduxSaga()
 const root = combineReducers({
-    ProductReducer,
     CartReducer, 
-    UserReducer
+    UserReducer,
+    ProductDataReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, root)

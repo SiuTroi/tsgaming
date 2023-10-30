@@ -60,7 +60,7 @@ html {
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    animation: spin .6s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -140,7 +140,7 @@ html {
 
 @layer components {
     .category-page {
-        @apply px-4 mt-20 lg:px-8 xl:px-0 xl:mx-[10%] 2xl:mx-[16%]
+        @apply md:px-4 mt-20 lg:px-8 xl:px-0 xl:mx-[10%] 2xl:mx-[16%]
     }
 
     .add-btn {
@@ -148,14 +148,14 @@ html {
     }
 
     .wrap-product {
-        @apply flex flex-wrap gap-2 xl:justify-start px-2
+        @apply flex flex-wrap xl:justify-start px-2
     }
 
     .item-product {
-        @apply w-[48%] sm:w-[49%] md:w-[32%] lg:w-[24%] h-[22rem] bg-white rounded-2xl p-3
+        @apply w-[48%] sm:w-[49%] md:w-[32%] lg:w-[24%] h-[22rem] bg-white rounded-2xl p-3 m-[2px] md:m-1
     }
 
     .img-product {
-        @apply mt-3 h-[8rem] xl:h-[8.5rem] flex justify-center items-center
+        @apply mt-3 h-[10rem] lg:h-[12rem] flex justify-center items-center
     }
 }
