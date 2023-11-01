@@ -7,6 +7,7 @@ import { ref, child, get } from "firebase/database";
 import { database } from "../../firebase";
 
 import speedTransport from "../../assets/freeship.png";
+import Loading from "../Loading";
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -65,7 +66,7 @@ const ProductDetail = () => {
                     <img
                       src={productDetail?.sponsorAvatar}
                       alt=""
-                      className="h-[40px] mr-1 rounded-full"
+                      className="h-[28px] mr-1 rounded-full"
                     />{" "}
                     {productDetail?.sponsorName}
                   </span>
@@ -96,9 +97,7 @@ const ProductDetail = () => {
           <ProductList />
         </div>
       ) : (
-        <div className="overlay z-9999">
-          <div className="absolute-center loading"></div>
-        </div>
+        <Loading />
       )}
     </>
   );

@@ -19,6 +19,7 @@ import UserPage from './components/User/UserPage'
 
 import tsgamingFaicon from "./assets/tsgaimg-faicon.png"
 import { uriDomain } from './constant';
+import Loading from './components/Loading';
 
 const Product = lazy(() => import('./components/Product/Product'))
 
@@ -53,7 +54,7 @@ const App = () => {
       <div>
         <Notification />
         <Header />
-        <Suspense fallback={<div className='overlay z-9999'><div className='absolute-center loading'></div></div>}>
+        <Suspense fallback={<Loading />}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/products' element={<Product />} />

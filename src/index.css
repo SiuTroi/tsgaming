@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--hue: 223;
+	--bg: hsl(var(--hue),90%,95%);
+	--fg: hsl(var(--hue),90%,5%);
+	--trans-dur: 0.3s;
+	/* font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320)); */
+}
+
 html {
     font-family: 'Fira Sans', sans-serif;
     background-color: #e5e7eb;
@@ -33,8 +41,15 @@ html {
     left: 0;
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
+.img-loading {
+    height: 120px;
+}
 .active {
     position: relative;
     font-weight: 600;
@@ -152,10 +167,11 @@ html {
     }
 
     .item-product {
-        @apply w-[48%] sm:w-[49%] md:w-[32%] lg:w-[24%] h-[22rem] bg-white rounded-2xl p-3 m-[2px] md:m-1
+        @apply w-[48%] sm:w-[49%] md:w-[32%] xl:w-[24%] h-[22rem] bg-white rounded-2xl p-3 m-[2px] md:m-1
     }
 
     .img-product {
         @apply mt-3 h-[10rem] lg:h-[12rem] flex justify-center items-center
     }
 }
+

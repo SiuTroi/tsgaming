@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { useEffect, useState } from "react";
+import Loading from "../Loading";
 
 const HomeItem = (props) => {
   const { data, title, className, isShowAllButton } = props;
@@ -17,7 +18,7 @@ const HomeItem = (props) => {
         <h2 className="text-blue-500 text-[32px] mb-3 font-bold">{title}</h2>
       </div>
       {!hasLoadDataDone ? (
-        <div>Loading...</div>
+        <Loading />
       ) : (
         <div>
           <div className="wrap-product">
