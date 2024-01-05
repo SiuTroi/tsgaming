@@ -167,7 +167,7 @@ html {
     }
 
     .item-product {
-        @apply w-[48%] sm:w-[49%] md:w-[32%] xl:w-[24%] h-[22rem] bg-white rounded-2xl p-3 m-[2px] md:m-1
+        @apply w-[48%] sm:w-[49%] md:w-[32%] xl:w-[24%] bg-white rounded-2xl p-3 m-[2px] md:m-1
     }
 
     .img-product {

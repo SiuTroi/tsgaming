@@ -33,7 +33,7 @@ export default function NewVideoOfTSGaming() {
   return (
     <div className="category-page mb-3">
       <div>
-        <h2 className="text-blue-500 text-[32px] mb-3 font-bold">Video Mới của TS Gaming</h2>
+        <h2 className="text-blue-500 text-[32px] mb-3 font-bold px-2">Video Mới của TS Gaming</h2>
       </div>
       <div className=""> 
       {/* flex flex-wrap */}

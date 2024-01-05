@@ -1,32 +1,32 @@
-import { lazy, Suspense, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
-import {Helmet} from "react-helmet";
-import { useDispatch, useSelector } from 'react-redux'
+import { lazy, Suspense, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import { Admin, Footer, Home, Notification } from './components'
-import LoginForm from './components/Form/LoginForm'
-import SignupForm from './components/Form/SignupForm'
-import Header from './components/Header/Header'
-import ProductDetail from './components/Product/ProductDetail'
-import Blogs from './components/Blogs'
-import UserPage from './components/User/UserPage'
+import { Admin, Footer, Home, Notification } from "./components";
+import LoginForm from "./components/Form/LoginForm";
+import SignupForm from "./components/Form/SignupForm";
+import Header from "./components/Header/Header";
+import ProductDetail from "./components/Product/ProductDetail";
+import Blogs from "./components/Blogs";
+import UserPage from "./components/User/UserPage";
 
 // import Checkout from './components/Checkout'
 // import HistoryCheckout from './components/HistoryCheckout'
 
-import tsgamingFaicon from "./assets/tsgaimg-faicon.png"
-import { uriDomain } from './constant';
-import Loading from './components/Loading';
+import tsgamingFaicon from "./assets/tsgaimg-faicon.png";
+import { uriDomain } from "./constant";
+import Loading from "./components/Loading";
 
-const Product = lazy(() => import('./components/Product/Product'))
+const Product = lazy(() => import("./components/Product/Product"));
 
 const App = () => {
-  const { pathname } = useLocation()
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.UserReducer)
+  const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.UserReducer);
 
   // disptach for saga get data
   useEffect(() => {
@@ -51,32 +51,33 @@ const App = () => {
         <meta property="og:image" content={tsgamingFaicon} />
         <meta property="og:type" content="article" />
       </Helmet>
-      <div>
+      <Suspense fallback={<Loading />}>
         <Notification />
         <Header />
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/products' element={<Product />} />
-            <Route path='/products/product-detail/:productId' element={<ProductDetail />} />
-            <Route path='/blogs' element={<Blogs />} />
-  
-            <Route path='/user' element={<UserPage />} />
-            
-            {/* <Route path='/checkout' element={<Checkout />} /> */}
-            {/* <Route path='/user/historycheckout' element={<HistoryCheckout />} /> */}
-  
-            <Route path='/login' element={<LoginForm />} />
-            <Route path='/signup' element={<SignupForm />} />
-  
-            {/* Admin */}
-            <Route path='/siutroiAdmin' element={<Admin />} />
-          </Routes>
-        </Suspense>
-        {pathname === "/checkout" ? <div></div> : <Footer />}
-      </div>
-    </>
-  )
-}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Product />} />
+          <Route
+            path="/products/product-detail/:productId"
+            element={<ProductDetail />}
+          />
+          <Route path="/blogs" element={<Blogs />} />
 
-export default App
+          <Route path="/user" element={<UserPage />} />
+
+          {/* <Route path='/checkout' element={<Checkout />} /> */}
+          {/* <Route path='/user/historycheckout' element={<HistoryCheckout />} /> */}
+
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignupForm />} />
+
+          {/* Admin */}
+          <Route path="/siutroiAdmin" element={<Admin />} />
+        </Routes>
+        {pathname === "/checkout" ? <div></div> : <Footer />}
+      </Suspense>
+    </>
+  );
+};
+
+export default App;

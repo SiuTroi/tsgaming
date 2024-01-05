@@ -77,12 +77,12 @@ const Slide = () => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper bg-white h-[60vh] sm:h-[45vh] md:h-[40vh] lg:h-[50vh] pt-10 rounded-3xl px-6"
+        className="mySwiper bg-white h-[50vh] sm:h-[40vh] lg:h-[50vh] pt-10 rounded-3xl px-6"
       >
         {dataLoad.map((item) => (
           <SwiperSlide key={item.productName}>
             <div className='relative'>
-              <img src={item.productImage} alt={item.productName} className="rounded-3xl homeSlide" />
+              <img src={item.productImage} alt={item.productName} className="rounded-3xl" />
               <a href={item.productLink}  className='block absolute left-[50%] translate-x-[-50%] bottom-8 bg-blue-500 text-white rounded-xl min-w-[120px] px-6 py-2 shadow-2xl hover:bg-white hover:text-blue-500 transition-all duration-500'>
                 Đặt hàng
               </a>

@@ -3,7 +3,7 @@ import "./loading.css";
 
 export default function Loading() {
   return (
-    <div className=" loaders">
+    <div className="loaders">
       <img src={yan} className="img-loading" />
       <main>
         <svg

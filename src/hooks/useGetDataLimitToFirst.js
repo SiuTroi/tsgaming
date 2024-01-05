@@ -1,4 +1,4 @@
-import { child, get, limitToFirst, query, ref } from "firebase/database";
+import { child, get, limitToFirst, limitToLast, query, ref } from "firebase/database";
 import { database } from "../firebase";
 import { useState, useEffect } from "react";
 
@@ -10,7 +10,7 @@ export const useGetDataLimitToFirst = (number) => {
             const dbRef = ref(database);
             const productDataQuery = query(
                 child(dbRef, "product_data"),
-                limitToFirst(number)
+                limitToLast(number)
             );
 
             try {
@@ -19,7 +19,7 @@ export const useGetDataLimitToFirst = (number) => {
                 snapshot.forEach((childSnapshot) => {
                     const s = childSnapshot.val();
                     // Xử lý dữ liệu ở đây
-                    retrievedData.push(s);
+                    retrievedData.unshift(s);
                 });
                 setData(retrievedData);
             } catch (error) {

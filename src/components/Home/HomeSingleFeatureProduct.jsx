@@ -8,7 +8,7 @@ const HomeSingleFeatureProduct = () => {
 
   return (
     <div className="category-page mb-3">
-      <h2 className="text-blue-500 text-[32px] font-bold">Nhiều người mua</h2>
+      <h2 className="text-blue-500 text-[32px] font-bold px-2">Nhiều người mua</h2>
           <div
             className="pt-12 bg-transparent lg:flex "
           >
@@ -41,24 +41,24 @@ const HomeSingleFeatureProduct = () => {
               </div>
               <div className="my-4 pt-4">
                 <p className="font-normal text-[14px] text-justify text-[#0000008f]">
-                <p class="truncate">Chào mừng bạn đến với cửa hàng của chúng tôi
-                    Sau đây là phần giới thiệu cửa hàng của chúng tôi
+                <p class="">Chào mừng bạn đến với cửa hàng của chúng tôi
+                    Sau đây là phần giới thiệu cửa hàng của chúng tôi <br />
 
-                    Chất liệu: Vỏ mềm silicone chất lượng cao.
-                    1. 100% thương hiệu mới, chất lượng cao, giá thấp.
-                    2. Dễ dàng lắp vào và tháo ra.
-                    3. Bảo vệ bạn khỏi bụi, trầy xước và va đập.
-                    4. Kỹ thuật thủ công tinh tế và thiết kế thời trang.
-                    5. Bảo vệ món đồ quý giá của bạn khỏi bị trầy xước và hư hỏng.
-                    6. Hoàn hảo như một món quà cho bạn bè và gia đình.
+                    Chất liệu: Vỏ mềm silicone chất lượng cao. <br />
+                    1. 100% thương hiệu mới, chất lượng cao, giá thấp. <br />
+                    2. Dễ dàng lắp vào và tháo ra. <br />
+                    3. Bảo vệ bạn khỏi bụi, trầy xước và va đập. <br />
+                    4. Kỹ thuật thủ công tinh tế và thiết kế thời trang. <br />
+                    5. Bảo vệ món đồ quý giá của bạn khỏi bị trầy xước và hư hỏng. <br />
+                    6. Hoàn hảo như một món quà cho bạn bè và gia đình. <br />
 
                     Kính thưa khách hàng. Đây là một số thông tin bạn cần biết, vui lòng đọc kỹ và cảm ơn bạn đã thông cảm.
-                    Nếu bạn có bất kỳ câu hỏi nào về đơn hàng của mình, vui lòng liên hệ với chúng tôi và chúng tôi sẽ liên hệ lại với bạn trong giờ hành chính. Đội ngũ dịch vụ khách hàng của chúng tôi luôn sẵn sàng trợ giúp!
-                    Chúng tôi sẽ đảm bảo khách hàng hài lòng 100%!
+                    Nếu bạn có bất kỳ câu hỏi nào về đơn hàng của mình, vui lòng liên hệ với chúng tôi và chúng tôi sẽ liên hệ lại với bạn trong giờ hành chính. Đội ngũ dịch vụ khách hàng của chúng tôi luôn sẵn sàng trợ giúp! <br />
+                    Chúng tôi sẽ đảm bảo khách hàng hài lòng 100%! <br />
                     Xin lưu ý rằng chúng tôi đang bắt đầu gửi các gói hàng từ Trung Quốc. Thời gian hậu cần chung là 7-14 ngày.
-                    Nhưng sẽ nhanh hơn nếu đến nơi.
-                    Cuối cùng, tôi muốn bạn mua sắm vui vẻ! Nếu bạn hài lòng với sản phẩm và dịch vụ của chúng tôi, vui lòng cho chúng tôi năm sao và hình ảnh của bạn.
-                    Cảm ơn bạn đã ủng hộ, cho chúng tôi cung cấp cho bạn những sản phẩm và dịch vụ tốt hơn.
+                    Nhưng sẽ nhanh hơn nếu đến nơi. <br />
+                    Cuối cùng, tôi muốn bạn mua sắm vui vẻ! Nếu bạn hài lòng với sản phẩm và dịch vụ của chúng tôi, vui lòng cho chúng tôi năm sao và hình ảnh của bạn. <br />
+                    Cảm ơn bạn đã ủng hộ, cho chúng tôi cung cấp cho bạn những sản phẩm và dịch vụ tốt hơn. <br />
                     Lưu ý: Hình ảnh chỉ để hiển thị, vui lòng chọn đúng mẫu điện thoại di động trước khi mua hàng</p>
                 </p>
                 <div className="flex flex-col w-full my-16">
